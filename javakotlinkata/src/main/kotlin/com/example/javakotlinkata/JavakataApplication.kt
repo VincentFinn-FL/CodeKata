@@ -1,4 +1,4 @@
-package com.example.javakata
+package com.example.javakotlinkata
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

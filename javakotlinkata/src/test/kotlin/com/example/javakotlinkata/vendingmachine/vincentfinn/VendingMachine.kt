@@ -1,4 +1,4 @@
-package com.example.javakata.vendingmachine.vincentfinn
+package com.example.javakotlinkata.vendingmachine.vincentfinn
 
 class VendingMachine {
     private var displayMessage: String = "Welcome!!!"

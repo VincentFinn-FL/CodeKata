@@ -1,4 +1,4 @@
-package com.example.javakata.katapotter.vincentfinn;
+package com.example.javakotlinkata.katapotter.vincentfinn;
 
 import org.junit.jupiter.api.Test;
 

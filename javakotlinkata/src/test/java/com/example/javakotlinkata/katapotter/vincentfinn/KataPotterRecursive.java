@@ -1,4 +1,4 @@
-package com.example.javakata.katapotter.vincentfinn;
+package com.example.javakotlinkata.katapotter.vincentfinn;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,4 +1,4 @@
-package com.example.javakata.vendingmachine.vincentfinn
+package com.example.javakotlinkata.vendingmachine.vincentfinn
 
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
