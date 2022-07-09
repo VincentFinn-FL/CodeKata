@@ -1,5 +1,5 @@
 {
-    init: function (elevators, floors) {
+    init: function init(elevators, floors) {
         // elevator
         // its on 0
         // pressed 2 button
@@ -8,20 +8,28 @@
         // when going to floor, stop at floors if matching direction is on that floor
         //
 
+        elevators[0].goToFloor(3);
+
         var floorUpQueue = [];
         var floorDownQueue = [];
+
+        function removeNumFromArray(array, num) {
+            for (let i = 0; i < array.length; i++) {
+                if (array[i] === num) {
+                    array.splice(i, 1);
+                }
+            }
+        }
 
         function getFloorQueue() {
             return floorDownQueue.concat(floorDownQueue);
         }
 
         function goToNearestPassenger(elevator) {
-            var closestFloor = 0;
-            var currentFloor = elevator.currentFloor();
-            var targetFloor = 0;
-            var minimumDistance = 100;
+            let targetFloor = 0;
+            let minimumDistance = 100;
             getFloorQueue().forEach((floorNum) => {
-                var distance = Math.abs(currentFloor - floorNum);
+                const distance = Math.abs(elevator.currentFloor() - floorNum);
                 if (distance < minimumDistance) {
                     targetFloor = floorNum;
                     minimumDistance = distance
@@ -43,28 +51,17 @@
             elevator.on("idle", function () {
                 goToNearestPassenger(elevator);
             });
+            elevator.on("floor_button_pressed", function(floorNum) {
+               elevator.goToFloor(floorNum);
+            });
             elevator.on("stopped_at_floor", function (floorNum) {
-                for (var i = 0; i < floorUpQueue.length; i++) {
-
-                    if (floorUpQueue[i] === floorNum) {
-
-                        floorUpQueue.splice(i, 1);
-                    }
-
-                }
-                for (var i = 0; i < floorDownQueue.length; i++) {
-
-                    if (floorDownQueue[i] === floorNum) {
-
-                        floorDownQueue.splice(i, 1);
-                    }
-
-                }
+                removeNumFromArray(floorUpQueue, floorNum);
+                removeNumFromArray(floorDownQueue, floorNum)
             });
         })
     }
 ,
-    update: function (dt, elevators, floors) {
+    update: function update(dt, elevators, floors) {
         // We normally don't need to do anything here
     }
 }
