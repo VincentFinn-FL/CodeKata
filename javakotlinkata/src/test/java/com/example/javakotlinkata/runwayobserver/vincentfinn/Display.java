@@ -1,13 +1,16 @@
 package com.example.javakotlinkata.runwayobserver.vincentfinn;
 
-public class Display {
-  private String message = "";
+import java.util.ArrayList;
+import java.util.List;
 
-  public String getMessage() {
-    return message;
+public class Display {
+  private List<String> messages = new ArrayList<>();
+
+  public List<String> getMessages() {
+    return messages;
   }
 
-  public void setMessage(String message) {
-    this.message = message;
+  public void addMessage(String message) {
+    this.messages.add(message);
   }
 }

@@ -1,18 +1,19 @@
 package com.example.javakotlinkata.runwayobserver.vincentfinn;
 
+import java.util.List;
+
 public class Runway {
   private final String name;
-  private final Display display;
+  private final List<Display> observers;
 
-  private String status;
-
-  public Runway(String name, Display display) {
+  public Runway(String name, List<Display> observers) {
     this.name = name;
-    this.display = display;
+    this.observers = observers;
   }
 
   public void setStatus(String status) {
-    this.status = status;
-    this.display.setMessage("Runway 18 Left: Green");
+    for (var observer : this.observers) {
+      observer.addMessage(name + ": " + status);
+    }
   }
 }
