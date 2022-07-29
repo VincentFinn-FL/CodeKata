@@ -8,6 +8,7 @@ import com.example.javakotlinkata.beverageprices.vince.beverages.Beverage;
 import com.example.javakotlinkata.beverageprices.vince.beverages.Coffee;
 import com.example.javakotlinkata.beverageprices.vince.beverages.HotChocolate;
 import com.example.javakotlinkata.beverageprices.vince.beverages.Tea;
+import com.example.javakotlinkata.beverageprices.vince.beverages.supplements.WithCinnamon;
 import com.example.javakotlinkata.beverageprices.vince.beverages.supplements.WithCream;
 import com.example.javakotlinkata.beverageprices.vince.beverages.supplements.WithMilk;
 import org.junit.jupiter.api.Test;
@@ -52,9 +53,14 @@ class BeveragesPricingTest {
   }
 
   @Test
-  public void computes_coffee_with_milk_and_cream_price() {
+  void computes_coffee_with_milk_and_cream_price() {
     Beverage coffeeWithMilkAndCream = new WithMilk(new WithCream(new Coffee()));
     assertThat(coffeeWithMilkAndCream.price(), is(closeTo(1.45, PRECISION)));
   }
 
+  @Test
+  void computes_coffee_with_cinnamon() {
+    Beverage coffeeWithCinnamon = new WithCinnamon(new Coffee());
+    assertThat(coffeeWithCinnamon.price(), is(closeTo(1.25, PRECISION)));
+  }
 }
