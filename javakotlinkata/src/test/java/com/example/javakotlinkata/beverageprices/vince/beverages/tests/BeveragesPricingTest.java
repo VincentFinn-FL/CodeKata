@@ -1,17 +1,17 @@
-package com.example.javakotlinkata.beverageprices;
+package com.example.javakotlinkata.beverageprices.vince.beverages.tests;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.closeTo;
 
-import com.example.javakotlinkata.beverageprices.beverages.Beverage;
-import com.example.javakotlinkata.beverageprices.beverages.Coffee;
-import com.example.javakotlinkata.beverageprices.beverages.CoffeeWithMilk;
-import com.example.javakotlinkata.beverageprices.beverages.CoffeeWithMilkAndCream;
-import com.example.javakotlinkata.beverageprices.beverages.HotChocolate;
-import com.example.javakotlinkata.beverageprices.beverages.HotChocolateWithCream;
-import com.example.javakotlinkata.beverageprices.beverages.Tea;
-import com.example.javakotlinkata.beverageprices.beverages.TeaWithMilk;
+import com.example.javakotlinkata.beverageprices.vince.beverages.Beverage;
+import com.example.javakotlinkata.beverageprices.vince.beverages.Coffee;
+import com.example.javakotlinkata.beverageprices.vince.beverages.CoffeeWithMilk;
+import com.example.javakotlinkata.beverageprices.vince.beverages.CoffeeWithMilkAndCream;
+import com.example.javakotlinkata.beverageprices.vince.beverages.HotChocolate;
+import com.example.javakotlinkata.beverageprices.vince.beverages.HotChocolateWithCream;
+import com.example.javakotlinkata.beverageprices.vince.beverages.Tea;
+import com.example.javakotlinkata.beverageprices.vince.beverages.TeaWithMilk;
 import org.junit.jupiter.api.Test;
 
 class BeveragesPricingTest {
