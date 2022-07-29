@@ -5,6 +5,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.closeTo;
 
 import com.example.javakotlinkata.beverageprices.vince.beverages.Beverage;
+import com.example.javakotlinkata.beverageprices.vince.beverages.BeverageBuilder;
+import com.example.javakotlinkata.beverageprices.vince.beverages.BeverageFactory;
 import com.example.javakotlinkata.beverageprices.vince.beverages.Coffee;
 import com.example.javakotlinkata.beverageprices.vince.beverages.HotChocolate;
 import com.example.javakotlinkata.beverageprices.vince.beverages.Tea;
@@ -62,5 +64,17 @@ class BeveragesPricingTest {
   void computes_coffee_with_cinnamon() {
     Beverage coffeeWithCinnamon = new WithCinnamon(new Coffee());
     assertThat(coffeeWithCinnamon.price(), is(closeTo(1.25, PRECISION)));
+  }
+
+  @Test
+  void compute_drink_with_factory_method() {
+    Beverage teaWithCreamAndCinnamon = BeverageFactory.teaWithCreamAndCinnamon();
+    assertThat(teaWithCreamAndCinnamon.price(), is(closeTo(1.70, PRECISION)));
+  }
+
+  @Test
+  void compute_drink_with_factory_builder() {
+    Beverage teaWithCreamAndCinnamon = BeverageBuilder.tea().withCream().withCinnamon().build();
+    assertThat(teaWithCreamAndCinnamon.price(), is(closeTo(1.70, PRECISION)));
   }
 }
