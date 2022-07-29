@@ -1,32 +1,32 @@
 package com.example.javakotlinkata.balancedparenthesis.luke;
 
+import java.util.Map;
 import java.util.Stack;
 
 public class BalancedParenthesis {
 
-    public boolean isBalanced(String input) {
+    private static final Map<Character, Character> characterMap = Map.of(
+        ')', '(',
+        ']', '[',
+        '}', '{'
+    );
+
+    public static boolean isBalanced(String input) {
+        if (input.length() % 2 != 0) {
+            return false;
+        }
+
         Stack<Character> stack = new Stack<>();
         for (int i = 0; i < input.length(); i++) {
             char currentCharacter = input.charAt(i);
-            if (i == 0) {
+            boolean isClosing = characterMap.containsKey(currentCharacter);
+
+            if (!isClosing) {
                 stack.push(currentCharacter);
                 continue;
             }
 
-            if (currentCharacter == '(' || currentCharacter == '{' || currentCharacter == '[') {
-                stack.push(currentCharacter);
-                continue;
-            }
-
-            if (currentCharacter == ')' && stack.peek() != '(') {
-                return false;
-            }
-
-            if (currentCharacter == '}' && stack.peek() != '{') {
-                return false;
-            }
-
-            if (currentCharacter == ']' && stack.peek() != '[') {
+            if (characterMap.get(currentCharacter) != stack.peek()) {
                 return false;
             }
 
@@ -35,5 +35,4 @@ public class BalancedParenthesis {
 
         return stack.empty();
     }
-
 }
