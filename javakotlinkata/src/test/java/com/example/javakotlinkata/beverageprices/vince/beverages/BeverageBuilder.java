@@ -5,40 +5,86 @@ import com.example.javakotlinkata.beverageprices.vince.beverages.supplements.Wit
 import com.example.javakotlinkata.beverageprices.vince.beverages.supplements.WithMilk;
 
 public class BeverageBuilder {
-  public static BeverageBuilder coffee() {
-    return new BeverageBuilder(new Coffee());
+  public static CoffeeBuilder coffee() {
+    return new CoffeeBuilder();
   }
 
-  public static BeverageBuilder tea() {
-    return new BeverageBuilder(new Tea());
+  public static TeaBuilder tea() {
+    return new TeaBuilder();
   }
 
-  public static BeverageBuilder hotChocolate() {
-    return new BeverageBuilder(new HotChocolate());
+  public static HotChocolateBuilder hotChocolate() {
+    return new HotChocolateBuilder();
   }
 
-  private Beverage beverage;
+  public static class CoffeeBuilder {
+    private Beverage beverage;
 
-  private BeverageBuilder(Beverage beverage) {
-    this.beverage = beverage;
+    private CoffeeBuilder() {
+      this.beverage = new Coffee();
+    }
+
+    public Beverage make() {
+      return beverage;
+    }
+
+    public CoffeeBuilder withMilk() {
+      beverage = new WithMilk(beverage);
+      return this;
+    }
+
+    public CoffeeBuilder withCinnamon() {
+      beverage = new WithCinnamon(beverage);
+      return this;
+    }
+
+    public CoffeeBuilder withCream() {
+      beverage = new WithCream(beverage);
+      return this;
+    }
   }
 
-  public BeverageBuilder withMilk() {
-    beverage = new WithMilk(beverage);
-    return this;
+  public static class TeaBuilder {
+    private Beverage beverage;
+
+    private TeaBuilder() {
+      this.beverage = new Tea();
+    }
+
+    public Beverage make() {
+      return beverage;
+    }
+
+    public TeaBuilder withMilk() {
+      beverage = new WithMilk(beverage);
+      return this;
+    }
+
+    public TeaBuilder withCinnamon() {
+      beverage = new WithCinnamon(beverage);
+      return this;
+    }
   }
 
-  public BeverageBuilder withCinnamon() {
-    beverage = new WithCinnamon(beverage);
-    return this;
-  }
+  public static class HotChocolateBuilder {
+    private Beverage beverage;
 
-  public BeverageBuilder withCream() {
-    beverage = new WithCream(beverage);
-    return this;
-  }
+    private HotChocolateBuilder() {
+      this.beverage = new HotChocolate();
+    }
 
-  public Beverage build() {
-    return beverage;
+    public Beverage make() {
+      return beverage;
+    }
+
+    public HotChocolateBuilder withCinnamon() {
+      beverage = new WithCinnamon(beverage);
+      return this;
+    }
+
+    public HotChocolateBuilder withCream() {
+      beverage = new WithCream(beverage);
+      return this;
+    }
   }
 }

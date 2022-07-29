@@ -73,8 +73,8 @@ class BeveragesPricingTest {
   }
 
   @Test
-  void compute_drink_with_factory_builder() {
-    Beverage teaWithCreamAndCinnamon = BeverageBuilder.tea().withCream().withCinnamon().build();
-    assertThat(teaWithCreamAndCinnamon.price(), is(closeTo(1.70, PRECISION)));
+  void compute_drink_with_builder() {
+    Beverage teaWithCreamAndCinnamon = BeverageBuilder.tea().withMilk().withCinnamon().make();
+    assertThat(teaWithCreamAndCinnamon.price(), is(closeTo(1.65, PRECISION)));
   }
 }
