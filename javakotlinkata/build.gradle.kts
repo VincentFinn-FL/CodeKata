@@ -1,8 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "2.7.1"
-    id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.6.21"
 }
@@ -16,13 +14,13 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("org.assertj:assertj-core:3.23.1")
+    implementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    testImplementation("org.assertj:assertj-core:3.23.1")
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.25")
 	testImplementation("io.strikt:strikt-core:0.34.0")
+    testImplementation("org.hamcrest:hamcrest:2.2")
 }
 
 tasks.withType<KotlinCompile> {
