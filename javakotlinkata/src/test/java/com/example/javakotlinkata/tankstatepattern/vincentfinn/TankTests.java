@@ -8,32 +8,49 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class TankTests {
     private static final int NORMAL_DAMAGE = 10;
 
+    private MockMovementSystem mockMovementSystem;
     private MockHealthSystem mockHealthSystem;
+    private Tank tank;
 
     @BeforeEach
     void setup() {
         mockHealthSystem = new MockHealthSystem();
+        mockMovementSystem = new MockMovementSystem();
+        tank = new Tank(NORMAL_DAMAGE, mockMovementSystem);
     }
 
     @Test
     void should_deal_10_damage() {
-        var tank = new Tank(NORMAL_DAMAGE);
-
         tank.attack(mockHealthSystem);
 
         assertThat(mockHealthSystem.damageTaken).isEqualTo(NORMAL_DAMAGE);
     }
 
-    class MockHealthSystem implements HealthSystem {
-        private int damageTaken = 0;
+    @Test
+    void should_move_tank_to_coordinates() {
+        tank.move(7, 11);
 
-        public int getDamageTaken() {
-            return damageTaken;
-        }
+        assertThat(mockMovementSystem.objectThatMoved).isEqualTo(tank);
+        assertThat(mockMovementSystem.coordinatesMovedTo).isEqualTo(new Coordinate(7, 11));
+    }
+
+    static class MockHealthSystem implements HealthSystem {
+        private int damageTaken = 0;
 
         @Override
         public void dealDamage(int damageDealt) {
             this.damageTaken = damageDealt;
+        }
+    }
+
+    static class MockMovementSystem implements MovementSystem {
+        private Coordinate coordinatesMovedTo = null;
+        private Object objectThatMoved = null;
+
+        @Override
+        public void moveTo(Object objectToMove, Coordinate moveToCoordinate) {
+            this.objectThatMoved = objectToMove;
+            this.coordinatesMovedTo = moveToCoordinate;
         }
     }
 }
