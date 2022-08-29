@@ -35,6 +35,9 @@ public class Tank {
     }
 
     public void move(int x, int y) {
+        if (this.state == TankState.SIEGE_MODE) {
+            return;
+        }
         movementSystem.moveTo(this, new Coordinate(x, y));
     }
 }

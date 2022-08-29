@@ -58,6 +58,13 @@ public class TankTests {
 
             assertThat(mockHealthSystem.damageTaken).isEqualTo(SIEGE_DAMAGE);
         }
+
+        @Test
+        void should_not_move_in_siege_mode() {
+            tank.move(7, 11);
+
+            assertThat(mockMovementSystem.wasCalled).isFalse();
+        }
     }
 
     static class MockHealthSystem implements HealthSystem {
@@ -73,10 +80,13 @@ public class TankTests {
         private Coordinate coordinatesMovedTo = null;
         private Object objectThatMoved = null;
 
+        private boolean wasCalled = false;
+
         @Override
         public void moveTo(Object objectToMove, Coordinate moveToCoordinate) {
             this.objectThatMoved = objectToMove;
             this.coordinatesMovedTo = moveToCoordinate;
+            this.wasCalled = true;
         }
     }
 }
