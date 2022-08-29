@@ -24,6 +24,12 @@ public class TankTests {
     @Nested
     class GivenTankMode {
         @Test
+        void should_switch_to_siege_mode() {
+            tank.setState(TankState.SIEGE_MODE);
+            assertThat(tank.getState()).isEqualTo(TankState.SIEGE_MODE);
+        }
+
+        @Test
         void should_deal_10_damage() {
             tank.attack(mockHealthSystem);
 
@@ -48,8 +54,9 @@ public class TankTests {
         }
 
         @Test
-        void should_switch_to_siege_mode() {
-            assertThat(tank.getState()).isEqualTo(TankState.SIEGE_MODE);
+        void should_switch_to_tank_mode() {
+            tank.setState(TankState.TANK_MODE);
+            assertThat(tank.getState()).isEqualTo(TankState.TANK_MODE);
         }
 
         @Test
