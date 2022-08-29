@@ -1,6 +1,7 @@
 package com.example.javakotlinkata.tankstatepattern.vincentfinn;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -20,35 +21,43 @@ public class TankTests {
         tank = new Tank(NORMAL_DAMAGE, SIEGE_DAMAGE, mockMovementSystem);
     }
 
-    @Test
-    void should_deal_10_damage() {
-        tank.attack(mockHealthSystem);
+    @Nested
+    class GivenTankMode {
+        @Test
+        void should_deal_10_damage() {
+            tank.attack(mockHealthSystem);
 
-        assertThat(mockHealthSystem.damageTaken).isEqualTo(NORMAL_DAMAGE);
+            assertThat(mockHealthSystem.damageTaken).isEqualTo(NORMAL_DAMAGE);
+        }
+
+        @Test
+        void should_move_tank_to_coordinates() {
+            tank.move(7, 11);
+
+            assertThat(mockMovementSystem.objectThatMoved).isEqualTo(tank);
+            assertThat(mockMovementSystem.coordinatesMovedTo).isEqualTo(new Coordinate(7, 11));
+        }
     }
 
-    @Test
-    void should_move_tank_to_coordinates() {
-        tank.move(7, 11);
+    @Nested
+    class GivenSiegeMode {
 
-        assertThat(mockMovementSystem.objectThatMoved).isEqualTo(tank);
-        assertThat(mockMovementSystem.coordinatesMovedTo).isEqualTo(new Coordinate(7, 11));
-    }
+        @BeforeEach
+        void setup() {
+            tank.setState(TankState.SIEGE_MODE);
+        }
 
-    @Test
-    void should_switch_to_siege_mode() {
-        tank.setState(TankState.SIEGE_MODE);
+        @Test
+        void should_switch_to_siege_mode() {
+            assertThat(tank.getState()).isEqualTo(TankState.SIEGE_MODE);
+        }
 
-        assertThat(tank.getState()).isEqualTo(TankState.SIEGE_MODE);
-    }
+        @Test
+        void should_deal_20_damage_in_siege_mode() {
+            tank.attack(mockHealthSystem);
 
-    @Test
-    void should_deal_20_damage_in_siege_mode() {
-        tank.setState(TankState.SIEGE_MODE);
-
-        tank.attack(mockHealthSystem);
-
-        assertThat(mockHealthSystem.damageTaken).isEqualTo(SIEGE_DAMAGE);
+            assertThat(mockHealthSystem.damageTaken).isEqualTo(SIEGE_DAMAGE);
+        }
     }
 
     static class MockHealthSystem implements HealthSystem {
