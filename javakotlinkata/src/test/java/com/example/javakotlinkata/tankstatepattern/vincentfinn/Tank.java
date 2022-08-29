@@ -2,16 +2,37 @@ package com.example.javakotlinkata.tankstatepattern.vincentfinn;
 
 enum TankState {
     TANK_MODE,
-    SIEGE_MODE
+    SIEGE_MODE,
+    SPEED_MODE
 }
 
 interface State {
-    public void attack(HealthSystem healthSystem);
-    public void moveTo(Object objectToMove, Coordinate coordinate);
+    void attack(HealthSystem healthSystem);
+
+    void moveTo(Object objectToMove, Coordinate coordinate);
+}
+
+class SpeedMode implements State {
+    private final MovementSystem movementSystem;
+
+    public SpeedMode(MovementSystem movementSystem) {
+        this.movementSystem = movementSystem;
+    }
+
+    @Override
+    public void attack(HealthSystem healthSystem) {
+        //log stuff
+        return;
+    }
+
+    @Override
+    public void moveTo(Object objectToMove, Coordinate coordinate) {
+        movementSystem.moveTo(objectToMove, coordinate);
+    }
 }
 
 class TankMode implements State {
-    private int damage;
+    private final int damage;
     private final MovementSystem movementSystem;
 
     public TankMode(int damage, MovementSystem movementSystem) {
@@ -31,7 +52,7 @@ class TankMode implements State {
 }
 
 class SiegeMode implements State {
-    private int damage;
+    private final int damage;
 
     public SiegeMode(int damage) {
         this.damage = damage;
@@ -76,6 +97,9 @@ public class Tank {
                 break;
             case SIEGE_MODE:
                 this.state = new SiegeMode(siegeDamage);
+                break;
+            case SPEED_MODE:
+                this.state = new SpeedMode(movementSystem);
                 break;
         }
     }

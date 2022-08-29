@@ -74,12 +74,43 @@ public class TankTests {
         }
     }
 
+    @Nested
+    class GivenSpeedMode {
+
+        @BeforeEach
+        void setup() {
+            tank.setState(TankState.SPEED_MODE);
+        }
+
+//        @Test
+//        void should_switch_to_tank_mode() {
+//            tank.setState(TankState.TANK_MODE);
+//            assertThat(tank.getState()).isEqualTo(TankState.TANK_MODE);
+//        }
+
+        @Test
+        void should_not_attack_in_speed_mode() {
+            tank.attack(mockHealthSystem);
+
+            assertThat(mockHealthSystem.wasCalled).isFalse();
+        }
+
+//        @Test
+//        void should_not_move_in_siege_mode() {
+//            tank.move(7, 11);
+//
+//            assertThat(mockMovementSystem.wasCalled).isFalse();
+//        }
+    }
+
     static class MockHealthSystem implements HealthSystem {
         private int damageTaken = 0;
+        private boolean wasCalled = false;
 
         @Override
         public void dealDamage(int damageDealt) {
             this.damageTaken = damageDealt;
+            this.wasCalled = true;
         }
     }
 
