@@ -8,11 +8,13 @@ enum TankState {
 
 public class Tank {
     private TankState state = TankState.TANK_MODE;
-    private int damage;
+    private int normalDamage;
+    private int siegeDamage;
     private final MovementSystem movementSystem;
 
-    public Tank(int damage, MovementSystem movementSystem) {
-        this.damage = damage;
+    public Tank(int normalDamage, int siegeDamage, MovementSystem movementSystem) {
+        this.normalDamage = normalDamage;
+        this.siegeDamage = siegeDamage;
         this.movementSystem = movementSystem;
     }
 
@@ -25,7 +27,11 @@ public class Tank {
     }
 
     public void attack(HealthSystem healthSystem) {
-        healthSystem.dealDamage(damage);
+        var damageToDeal = normalDamage;
+        if(state.equals(TankState.SIEGE_MODE)) {
+            damageToDeal = siegeDamage;
+        }
+        healthSystem.dealDamage(damageToDeal);
     }
 
     public void move(int x, int y) {

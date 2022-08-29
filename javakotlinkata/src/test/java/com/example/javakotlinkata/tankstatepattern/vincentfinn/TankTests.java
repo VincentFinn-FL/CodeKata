@@ -7,6 +7,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class TankTests {
     private static final int NORMAL_DAMAGE = 10;
+    private static final int SIEGE_DAMAGE = 20;
 
     private MockMovementSystem mockMovementSystem;
     private MockHealthSystem mockHealthSystem;
@@ -16,7 +17,7 @@ public class TankTests {
     void setup() {
         mockHealthSystem = new MockHealthSystem();
         mockMovementSystem = new MockMovementSystem();
-        tank = new Tank(NORMAL_DAMAGE, mockMovementSystem);
+        tank = new Tank(NORMAL_DAMAGE, SIEGE_DAMAGE, mockMovementSystem);
     }
 
     @Test
@@ -39,6 +40,15 @@ public class TankTests {
         tank.setState(TankState.SIEGE_MODE);
 
         assertThat(tank.getState()).isEqualTo(TankState.SIEGE_MODE);
+    }
+
+    @Test
+    void should_deal_20_damage_in_siege_mode() {
+        tank.setState(TankState.SIEGE_MODE);
+
+        tank.attack(mockHealthSystem);
+
+        assertThat(mockHealthSystem.damageTaken).isEqualTo(SIEGE_DAMAGE);
     }
 
     static class MockHealthSystem implements HealthSystem {
