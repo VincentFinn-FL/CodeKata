@@ -1,4 +1,4 @@
-package com.example.javakotlinkata.balancedparenthesis.luke;
+package com.example.javakotlinkata.balancedparenthesis.lukemueller;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
