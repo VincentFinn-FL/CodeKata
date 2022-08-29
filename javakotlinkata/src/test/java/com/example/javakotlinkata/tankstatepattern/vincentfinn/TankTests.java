@@ -34,6 +34,13 @@ public class TankTests {
         assertThat(mockMovementSystem.coordinatesMovedTo).isEqualTo(new Coordinate(7, 11));
     }
 
+    @Test
+    void should_switch_to_siege_mode() {
+        tank.setState(TankState.SIEGE_MODE);
+
+        assertThat(tank.getState()).isEqualTo(TankState.SIEGE_MODE);
+    }
+
     static class MockHealthSystem implements HealthSystem {
         private int damageTaken = 0;
 
