@@ -1,7 +1,6 @@
 package com.example.javakotlinkata.adventofcode2020.vince
 
 import com.example.javakotlinkata.A
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 internal class Advent02Test {
